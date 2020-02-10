@@ -7,6 +7,7 @@ public class ballMovement : MonoBehaviour
 {
     public float ballSpeed = 10.0f;
     public Rigidbody rb;
+<<<<<<< HEAD
     public string lastHit = "";
     public int scoreL, scoreR = 0;
     public float x, y, z;
@@ -25,6 +26,18 @@ public class ballMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+=======
+    public int scoreL, scoreR, shield = 0;
+    public float x, y, z;
+    public float zMovement = 7.5f;
+    float increase = 2.5f;
+    Vector3 start = new Vector3(0f, .5f, 0f);
+    AudioSource audioSource;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+>>>>>>> fb6aef52aa7ef81656fe80ae3fb224ede86bb871
         audioSource = GetComponent<AudioSource>();
         rb.AddForce(-20f, 0, zMovement);
         leftPaddle = GameObject.Find("PaddleLeft");
@@ -73,12 +86,20 @@ public class ballMovement : MonoBehaviour
             rb.AddForce(-20f, 0, zMovement);
         }
 
+<<<<<<< HEAD
+=======
+        if (rb.position.x == 0 && shield != 0)
+        {
+            shield--;
+        }
+>>>>>>> fb6aef52aa7ef81656fe80ae3fb224ede86bb871
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "PaddleLeft" || collision.gameObject.name == "PaddleRight")
         {
+<<<<<<< HEAD
             if (collision.gameObject.name == "PaddleRight")
             {
                 audioSource.pitch = rb.velocity.x / -7;
@@ -105,6 +126,16 @@ public class ballMovement : MonoBehaviour
                 leftPaddle.transform.localScale -= scaleChange;
             }
         }
+=======
+            audioSource.pitch = rb.velocity.x / 10;
+            audioSource.Play();
+            rb.AddForce(rb.velocity * increase);
+        }
+        if (collision.gameObject.name == "Cylinder")
+        {
+            shield = 3;
+        }
+>>>>>>> fb6aef52aa7ef81656fe80ae3fb224ede86bb871
 
 
     }
