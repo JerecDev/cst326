@@ -7,16 +7,13 @@ public class LevelParserStarter : MonoBehaviour
 {
     public string filename;
 
-    public GameObject Rock;
-
     public GameObject Brick;
-
+    public GameObject Rock;
     public GameObject QuestionBox;
-
     public GameObject Stone;
 
     public Transform parentTransform;
-    // Start is called before the first frame update
+
     void Start()
     {
         RefreshParse();
@@ -26,23 +23,22 @@ public class LevelParserStarter : MonoBehaviour
     private void FileParser()
     {
         string fileToParse = string.Format("{0}{1}{2}.txt", Application.dataPath, "/Resources/", filename);
-
         using (StreamReader sr = new StreamReader(fileToParse))
         {
             string line = "";
             int row = 0;
-
             while ((line = sr.ReadLine()) != null)
             {
                 int column = 0;
                 char[] letters = line.ToCharArray();
                 foreach (var letter in letters)
                 {
-                    SpawnPrefab()
+                    SpawnPrefab(letter, new Vector3(column, -row, -0.5f));
+                    column++;
                 }
+                row++;
 
             }
-
             sr.Close();
         }
     }
@@ -50,20 +46,22 @@ public class LevelParserStarter : MonoBehaviour
     private void SpawnPrefab(char spot, Vector3 positionToSpawn)
     {
         GameObject ToSpawn;
+        bool qb = false;
 
         switch (spot)
         {
-            case 'b': Debug.Log("Spawn Brick"); break;
-            case '?': Debug.Log("Spawn QuestionBox"); break;
-            case 'x': Debug.Log("Spawn Rock"); break;
-            case 's': Debug.Log("Spawn Rock"); break;
-            //default: Debug.Log("Default Entered"); break;
+            case 'b': ToSpawn = Brick; break;
+            case '?': ToSpawn = QuestionBox; break;
+            case 'x': ToSpawn = Rock; break;
+            case 's': ToSpawn = Stone; break;
             default: return;
-                //ToSpawn = //Brick;       break;
         }
-
-        //ToSpawn = GameObject.Instantiate(ToSpawn, parentTransform);
-        //ToSpawn.transform.localPosition = positionToSpawn;
+        ToSpawn = GameObject.Instantiate(ToSpawn, parentTransform);
+        if (qb == true)
+        {
+            positionToSpawn.z = -1f;
+        }
+        ToSpawn.transform.localPosition = positionToSpawn;
     }
 
     public void RefreshParse()
@@ -72,7 +70,7 @@ public class LevelParserStarter : MonoBehaviour
         newParent.name = "Environment";
         newParent.transform.position = parentTransform.position;
         newParent.transform.parent = this.transform;
-        
+
         if (parentTransform) Destroy(parentTransform.gameObject);
 
         parentTransform = newParent.transform;
