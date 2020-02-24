@@ -21,14 +21,21 @@ public class CubeDestroyer : MonoBehaviour
             {
                 BoxCollider boxCollider = hit.collider as BoxCollider;
 
-                if (boxCollider.tag != null)
-                    Destroy(boxCollider.gameObject);
-
+                
+               if (boxCollider.tag != null)
+                  Destroy(boxCollider.gameObject);
+                
                 if (boxCollider.tag == "qbox")
                 {
                     Destroy(boxCollider.gameObject);
                     coins++;
                     coinText.text = "Coins x " + coins;
+                }
+                if (boxCollider.tag == "brick")
+                {
+                    Destroy(boxCollider.gameObject);
+                    points += 100;
+                    scoreText.text = points.ToString();
                 }
             }
         }

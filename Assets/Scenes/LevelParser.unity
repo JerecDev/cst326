@@ -281,11 +281,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   filename: Test
+  Acid: {fileID: 715136123436350721, guid: c9af737b1d2c2de4d81916dca87e4099, type: 3}
   Brick: {fileID: 6044276167976540091, guid: 4789c92f63d12064ea4d0533ae04576f, type: 3}
   Rock: {fileID: 2339807799314650475, guid: 33fa972321d3f3347a6c0ffec2fb38b3, type: 3}
   QuestionBox: {fileID: 4141127085222181316, guid: 38d7a7e534db99a4eb2524c565ed67c3,
     type: 3}
   Stone: {fileID: 7303250169985485240, guid: 59132b71904244b44b1adeb1d4add181, type: 3}
+  Ethan: {fileID: 100168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+  Goal: {fileID: 2820935678799156845, guid: 167d1d8f5a0f37342a264d7b0b223825, type: 3}
   parentTransform: {fileID: 992824850}
 --- !u!4 &406602702
 Transform:
@@ -699,7 +702,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 68.5
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -725,7 +728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.4, y: 4.6, z: -10}
+  m_LocalPosition: {x: 29, y: 6.68, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -781,7 +784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 454.5, y: 240}
+  m_AnchoredPosition: {x: 452.6, y: 240}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987230956
@@ -1021,6 +1024,7 @@ GameObject:
   - component: {fileID: 1143721213}
   - component: {fileID: 1143721215}
   - component: {fileID: 1143721214}
+  - component: {fileID: 1143721216}
   m_Layer: 5
   m_Name: worldTimeUI
   m_TagString: Untagged
@@ -1087,6 +1091,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143721212}
   m_CullTransparentMesh: 0
+--- !u!114 &1143721216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143721212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3205167f2ded35a4192ad04f098ec6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1143721214}
 --- !u!1 &1272256498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1318,7 @@ GameObject:
   - component: {fileID: 1720156942}
   - component: {fileID: 1720156944}
   - component: {fileID: 1720156943}
+  - component: {fileID: 1720156945}
   m_Layer: 5
   m_Name: scoreUI
   m_TagString: Untagged
@@ -1358,7 +1376,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00000
+  m_Text: 0
 --- !u!222 &1720156944
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1367,6 +1385,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720156941}
   m_CullTransparentMesh: 0
+--- !u!114 &1720156945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720156941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3cf5ceff0474b418a9b82348b850ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1720156943}
+  coinText: {fileID: 0}
+  points: 0
+  coins: 0
 --- !u!1 &1994830861
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,15 +7,19 @@ public class LevelParserStarter : MonoBehaviour
 {
     public string filename;
 
+    public GameObject Acid;
     public GameObject Brick;
     public GameObject Rock;
     public GameObject QuestionBox;
     public GameObject Stone;
+    public GameObject Ethan;
+    public GameObject Goal;
 
     public Transform parentTransform;
 
     void Start()
     {
+        Acid = GameObject.FindGameObjectWithTag("hazard");
         RefreshParse();
     }
 
@@ -54,6 +58,9 @@ public class LevelParserStarter : MonoBehaviour
             case '?': ToSpawn = QuestionBox; break;
             case 'x': ToSpawn = Rock; break;
             case 's': ToSpawn = Stone; break;
+            case 'a': ToSpawn = Acid; break;
+            case 'e': ToSpawn = Ethan; break;
+            case 'g': ToSpawn = Goal; break;
             default: return;
         }
         ToSpawn = GameObject.Instantiate(ToSpawn, parentTransform);
