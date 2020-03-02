@@ -13,10 +13,29 @@ public class Player : MonoBehaviour
       if (Input.GetKeyDown(KeyCode.Space))
       {
         GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
-        Debug.Log("Bang!");
-
-        Destroy(shot, 3f);
-
+        Destroy(shot, 4f);
       }
+
+        Vector2 movement = Vector2.zero;
+        float moveSpeed = 15.0f;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement.x = (transform.right * Time.deltaTime * -moveSpeed).x;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement.x = (transform.right * Time.deltaTime * moveSpeed).x;
+        }
+        movement = movement + (Vector2)(transform.position);
+        movement.y = -8.0f;
+        GetComponent<Rigidbody2D>().MovePosition(movement);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(collision.gameObject);
+        Destroy(gameObject);
+    }
+
 }
