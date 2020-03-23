@@ -1,77 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public Text text;
-    int score;
-    public static float enemySpeed = 0;
-    public float xSpeed;
-    public float turnTime = 5f;
-    private bool xMove = false;
-    public GameObject bullet;
-    Vector3 posChange = new Vector3(0f, 1.5f, 0f);
+  public Waypoint currentDestination;
+  public WaypointManager waypointManager;
+  private int currentIndexWaypoint = 0;
+  public float speed = 1;
 
-    void Update()
+  public void Initialize(WaypointManager waypointManager)
+  {
+    this.waypointManager = waypointManager;
+    GetNextWaypoint();
+    transform.position = currentDestination.transform.position; // Move to WP0
+    GetNextWaypoint();
+  }
+
+  void Update()
+  {
+    Vector3 direction = currentDestination.transform.position - transform.position;
+    if (direction.magnitude < .2f)
     {
-        xSpeed = 5.0f;
-        if(!xMove)
-        {
-            StartCoroutine(xMoveCo());
-            if (gameObject.tag == "Shooter")
-            {
-                GameObject shot = Instantiate(bullet, gameObject.transform.position - posChange, Quaternion.identity);
-                Destroy(shot, 4f);
-            }
-        }
-
+      GetNextWaypoint();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        enemySpeed += 2.0f;
-        ScoreManager.score += 10;
-        if (gameObject.tag == "Shooter")
-        {
-            ScoreManager.score += 10;
-        }
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
-    }
+    transform.Translate(direction.normalized * speed * Time.deltaTime);
+  }
 
-    IEnumerator xMoveCo()
-    {
-        xMove = true;
-        float time = 0.0f;
-
-        while (time < turnTime)
-        {
-            time += Time.deltaTime;
-            Vector2 movement = Vector2.zero;
-            movement.y = (transform.up * Time.deltaTime * -enemySpeed).y;
-            movement.x = (transform.right * Time.deltaTime * -xSpeed).x;
-            movement = movement + (Vector2)(transform.position);
-            GetComponent<Rigidbody2D>().MovePosition(movement);
-            yield return null;
-        }
-        if (gameObject.tag == "Shooter")
-        {
-            GameObject shot = Instantiate(bullet, gameObject.transform.position - posChange, Quaternion.identity);
-            Destroy(shot, 4f);
-        }
-        while (time > 0 - turnTime/2)
-        {
-            time -= Time.deltaTime;
-            Vector2 movement = Vector2.zero;
-            movement.y = (transform.up * Time.deltaTime * -enemySpeed).y;
-            movement.x = (transform.right * Time.deltaTime * xSpeed).x;
-            movement = movement + (Vector2)(transform.position);
-            GetComponent<Rigidbody2D>().MovePosition(movement);
-            yield return null;
-        }
-        xMove = false;
-    }
-
+  private void GetNextWaypoint()
+  {
+    currentDestination = waypointManager.GetNeWaypoint(currentIndexWaypoint);
+    currentIndexWaypoint++;
+  }
 }
