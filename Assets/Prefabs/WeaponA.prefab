@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6231101540727749382}
   - component: {fileID: 6231101540727749384}
   - component: {fileID: 6231101540727749385}
+  - component: {fileID: -1364209777276397138}
   m_Layer: 0
   m_Name: WeaponA
   m_TagString: Untagged
@@ -60,12 +61,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6231101540727749381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41ab45e7c47d4c947aec4d4edd338404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 908343121311076100, guid: 9cb9d581b39a0524a952cc706ecd131f, type: 3}
+  bullet: {fileID: 0}
+  target: {fileID: 0}
 --- !u!33 &6231101540727749384
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,3 +115,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-1364209777276397138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231101540727749381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06624fe9cd8b1847a2b12232bd2dcfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defense: {fileID: 6231101540727749381}
